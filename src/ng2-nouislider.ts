@@ -64,6 +64,7 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   @Input() public limit: number;
   @Input() public min: number;
   @Input() public max: number;
+  @Input() public pips: any;
   @Input() public snap: boolean;
   @Input() public animate: boolean | boolean[];
   @Input() public range: any;
@@ -156,14 +157,15 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   ngOnChanges(changes: any) {
-    if (this.slider && (changes.min || changes.max || changes.step || changes.range)) {
+    if (this.slider && (changes.min || changes.max || changes.step || changes.range || changes.pips)) {
       setTimeout(() => {
         this.slider.updateOptions({
           range: Object.assign({}, {
             min: this.min,
             max: this.max
           }, this.range || {}),
-          step: this.step
+          step: this.step,
+          pips: this.pips
         });
       });
     }
