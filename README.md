@@ -54,6 +54,19 @@ this.form1 = this.formBuilder.group({ 'single': [ 10 ] });
 
 This component based on [nouislider](https://refreshless.com/nouislider/). Documentation about additional settings (passed in [config] @Input) can found [here](https://refreshless.com/nouislider/slider-options/).
 
+## pips
+sliderControl.ts file
+
+public pips: any = {
+    mode: 'values',
+    values: [0, 50, 100],
+    density: 10
+  };
+
+sliderControl.html
+
+          <nouislider #weightSlider  [pips]="pips" [min]="minSlider" [max]="maxSlider" id="weight-slider" [config]="nouiSliderConfig" [(ngModel)]="weightActivity.Activity" (ngModelChange)="onSliderChange($event)"></nouislider>
+
 
 ## Start development
 
