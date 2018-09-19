@@ -33,6 +33,7 @@ export class DefaultFormatter implements NouiFormatter {
   }
 }
 
+var noUISliderThis: NouisliderComponent;
 @Component({
   selector: 'nouislider',
   host: {
@@ -87,7 +88,9 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  constructor(private el: ElementRef, private renderer : Renderer2) { }
+  constructor(private el: ElementRef, private renderer : Renderer2) {
+    noUISliderThis = this;
+   }
 
   ngOnInit(): void {
     let inputsConfig = JSON.parse(JSON.stringify({
@@ -112,6 +115,32 @@ export class NouisliderComponent implements ControlValueAccessor, OnInit, OnChan
       Object.assign(this.config, inputsConfig)
     );
 
+/*
+    const tooltip = this.el.nativeElement.querySelector('.noUi-tooltip');
+    const width = tooltip.clientWidth;
+    var style = window.getComputedStyle ? getComputedStyle(this.el.nativeElement, null) : this.el.nativeElement.currentStyle;
+    const padding = parseInt(style.paddingLeft) || 0;
+    const margin = parseInt(width) / 2 +  padding  + 2;
+    tooltip.style.marginLeft = -margin;
+    tooltip.addEventListener('click', function(evt: any) {
+      evt.currentTarget.innerHTML = '<input class="input-tooltip" type="number" min="1" max="10" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number">';
+      const input_tooltip = this.children[0];
+      input_tooltip.value = noUISliderThis.slider.get();
+      input_tooltip.addEventListener('focus', function(e: any){
+        console.log(e);
+      });
+      input_tooltip.addEventListener('focusout', function(e: any){
+        console.log(e);
+      });
+      input_tooltip.addEventListener('keydown', function (e: any){
+        const valor = this.val();
+        noUISliderThis.slider.set(valor);
+        console.log(valor);
+      });
+
+      console.log(evt);
+    });
+*/
     this.handles = [].slice.call(this.el.nativeElement.querySelectorAll('.noUi-handle'));
 
     if(this.config.keyboard) {
